@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-@CrossOrigin(origins = "http://127.0.0.1:5000/")
+@CrossOrigin(origins = "http://54.88.30.241:5000/")
 @RestController
 @RequestMapping("/api/")
 @AllArgsConstructor
