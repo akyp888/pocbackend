@@ -1,5 +1,6 @@
 package com.techm.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "blogPost")
+@JsonFormat
 public class BlogPost {
 
     @Id @GeneratedValue

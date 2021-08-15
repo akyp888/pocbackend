@@ -3,12 +3,13 @@ package com.techm.blog.controller;
 import com.techm.blog.model.BlogPost;
 import com.techm.blog.repo.blogPostRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.NonNull;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
+
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/api/")
@@ -17,9 +18,30 @@ public class BlogpostController {
 
     private final blogPostRepo blogPostRepo;
 
-    @GetMapping("/posts")
+    @GetMapping("posts")
     List<BlogPost> all() {
         return blogPostRepo.findAll();
     }
 
+
+    @PutMapping("posts")
+    BlogPost replaceBlogpost(@RequestBody BlogPost newBlogPost) {
+
+        return blogPostRepo.findById(newBlogPost.getId())
+                .map(post -> {
+                    post.setTitle(newBlogPost.getTitle().isEmpty()?post.getTitle():newBlogPost.getTitle());
+                    post.setDescription(newBlogPost.getDescription().isEmpty()?post.getDescription():newBlogPost.getDescription());
+                    return blogPostRepo.save(post);
+                })
+                .orElseGet(() -> blogPostRepo.save(newBlogPost));
+    }
+
+    @PostMapping("posts")
+    BlogPost newBlogPost(@RequestBody BlogPost newBlogPoat) {
+        return blogPostRepo.save(newBlogPoat);
+    }
+    @DeleteMapping("posts/{id}")
+    void deleteBlogPost(@PathVariable Integer id){
+         blogPostRepo.deleteById(id);
+    }
 }
