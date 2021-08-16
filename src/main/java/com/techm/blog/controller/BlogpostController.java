@@ -3,16 +3,13 @@ package com.techm.blog.controller;
 import com.techm.blog.model.BlogPost;
 import com.techm.blog.repo.blogPostRepo;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
-
-@CrossOrigin(origins = "http://52.206.79.151:5000/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("api/")
 @AllArgsConstructor
 public class BlogpostController {
 
